@@ -42,33 +42,31 @@ To design and simulate a seven-segment display driver using Verilog HDL, and ver
 ## Verilog Code for Seven-Segment Display  
 
 ```verilog
-// seven_segment_display.v
-module seven_segment_display (
-    input wire [3:0] binary_input,
-    output reg [6:0] seg_output
-);
-
-always @(*) begin
-    case (binary_input)
-        4'b0000: seg_output = 7'b0111111; // 0
-        4'b0001: seg_output = 7'b0000110; // 1
-        4'b0010: seg_output = 7'b1011011; // 2
-        4'b0011: seg_output = 7'b1001111; // 3
-        4'b0100: seg_output = 7'b1100110; // 4
-        4'b0101: seg_output = 7'b1101101; // 5
-        4'b0110: seg_output = 7'b1111101; // 6
-        4'b0111: seg_output = 7'b0000111; // 7
-        4'b1000: seg_output = 7'b1111111; // 8
-        4'b1001: seg_output = 7'b1101111; // 9
-        default: seg_output = 7'b0000000; // blank or error
-    endcase
+module segment_7(bcd,seg);
+input [3:0]bcd;
+output reg[6:0]seg;
+always@(bcd)
+begin
+case(bcd)
+4'd0 : seg= 7'b0111111;
+4'd1 : seg= 7'b0000110;
+4'd2 : seg= 7'b1011011;
+4'd3 : seg= 7'b1001111;
+4'd4 : seg= 7'b1100110;
+4'd5 : seg= 7'b1101101;
+4'd6 : seg= 7'b1111101;
+4'd7 : seg= 7'b0000111;
+4'd8 : seg= 7'b1111111;
+4'd9 : seg= 7'b1100111;
+default:seg=7'b0000000;
+endcase
 end
-
 endmodule
 ```
 ## Simulated Output
 
-_____ Keep Simulated output ___________
+![Screenshot 2025-03-17 121835](https://github.com/user-attachments/assets/ae139d6b-a25d-4671-a08d-471c63ec9176)
+
 
 
 ## Testbench for Seven-Segment Display
